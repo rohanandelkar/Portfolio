@@ -16,7 +16,7 @@ import {
   X,
 } from "lucide-react"
 import Link from "next/link"
-import { useState } from "react"
+import { type CSSProperties, useState } from "react"
 
 const projects = [
   {
@@ -106,9 +106,14 @@ const experience = [
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [pointer, setPointer] = useState({ x: 0, y: 0 })
 
   return (
-    <main>
+    <main
+      onMouseMove={(event) => setPointer({ x: event.clientX, y: event.clientY })}
+      style={{ "--pointer-x": `${pointer.x}px`, "--pointer-y": `${pointer.y}px` } as CSSProperties}
+    >
+      <div className="pointer-glow" aria-hidden="true" />
       <header className="site-header">
         <Link className="wordmark" href="#top" onClick={() => setMenuOpen(false)}>
           RA<span>/</span>26
@@ -166,7 +171,15 @@ export default function Home() {
         </div>
         <div className="project-grid">
           {projects.map((project) => (
-            <article className={`project-card ${project.accent}`} key={project.title}>
+            <article
+              className={`project-card ${project.accent}`}
+              key={project.title}
+              onMouseMove={(event) => {
+                const rect = event.currentTarget.getBoundingClientRect()
+                event.currentTarget.style.setProperty("--spot-x", `${event.clientX - rect.left}px`)
+                event.currentTarget.style.setProperty("--spot-y", `${event.clientY - rect.top}px`)
+              }}
+            >
               <div className="project-meta"><span>{project.number}</span><span>{project.type}</span></div>
               <div className="project-icon">{project.accent === "lime" ? <ShieldCheck size={26} /> : project.accent === "blue" ? <Code2 size={26} /> : <Sparkles size={26} />}</div>
               <h3>{project.title}</h3>
