@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -9,14 +9,9 @@ const inter = Inter({
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "Rohan Andelkar — Machine Learning Engineer | Portfolio",
-  description: "Portfolio of Rohan Andelkar — CS undergraduate (Class of 2027) specialising in Data Analytics, Machine Learning, Cloud Computing (Azure, IBM Cloud), and Cybersecurity. Proven ability to develop AI-driven applications and build interactive Power BI dashboards.",
+  title: "Rohan Andelkar — I build useful intelligence",
+  description: "Portfolio of Rohan Andelkar, a computer science engineer working across machine learning, data products, cloud AI, and cybersecurity.",
   keywords: ["Rohan Andelkar", "machine learning", "data analytics", "Power BI", "Azure", "IBM Cloud", "cybersecurity", "Python", "React", "portfolio", "GATE 2026"],
   authors: [{ name: "Rohan Andelkar" }],
 };
@@ -29,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"
